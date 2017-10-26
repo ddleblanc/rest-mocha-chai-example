@@ -17,9 +17,11 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "eslint-config-google": "^0.9.1",
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1"
   },
   "scripts": {
+    "dev": "nodemon server",
     "start": "SET_NODE_ENV=dev && node server.js",
     "test": "mocha --timeout 10000"
   }

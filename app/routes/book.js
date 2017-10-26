@@ -18,7 +18,7 @@ exports.getBooks = (req, res) => {
 
 exports.postBook = (req, res) => {
   const newBook = new Book(req.body)
-  neBook.save((err, book) => {
+  newBook.save((err, book) => {
     if (err) res.send(err)
     res.json({ msg: "Book saved.", book })
   })

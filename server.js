@@ -17,6 +17,7 @@ let app = express()
 
 // DB options
 let options = {
+  useMongoClient: true,
   server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
   replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
 }
@@ -50,7 +51,7 @@ app
   .delete(book.deleteBook)
   .put(book.updateBook)
 
-app.listen("Server started on port", PORT)
+app.listen(PORT, () => console.log("Server started on port", PORT))
 
 // For testing
 module.exports = app
