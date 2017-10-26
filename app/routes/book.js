@@ -9,43 +9,41 @@ let Book = require("../models/book")
 
 exports.getBooks = (req, res) => {
   // Query the DB. Send all books if no errors
-  let query = Book.find({})
-  query.exec((err, books) => {
+  Book.find({}, (err, books) => {
     if (err) res.send(err)
-    res.json(books)
+    else res.json(books)
   })
 }
 
 exports.postBook = (req, res) => {
-  const newBook = new Book(req.body)
+  var newBook = new Book(req.body)
   newBook.save((err, book) => {
     if (err) res.send(err)
-    res.json({ msg: "Book saved.", book })
+    else res.json({ msg: "Book successfully added!", book })
   })
 }
 
 exports.getBook = (req, res) => {
   Book.findById(req.params.id, (err, book) => {
     if (err) res.send(err)
-    res.json(book)
+    else res.json(book)
   })
 }
 
 exports.deleteBook = (req, res) => {
   Book.remove({ _id: req.params.id }, (err, result) => {
     if (err) res.send(err)
-    res.json({ msg: "Book removed.", result })
+    else res.json({ msg: "Book removed.", result })
   })
 }
 
 exports.updateBook = (req, res) => {
   Book.findById(req.params.id, (err, book) => {
     if (err) res.send(err)
-
-    const updatedBook = { ...req.body, ...book }
-    updatedBook.save((err, book) => {
-      if (err) res.send(err)
-      res.json({ msg: "Book updated.", book })
-    })
+    else
+      Object.assign(book, req.body).save((err, book) => {
+        if (err) res.send(err)
+        else res.json({ msg: "Book updated!", book })
+      })
   })
 }
